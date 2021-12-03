@@ -35,7 +35,8 @@ casilla();}
 
 
 int main() 
-{FILE *pExtra = fopen("extra.txt", "r+");
+{int hay_ganador; //para verificar si hay ganador
+  FILE *pExtra = fopen("extra.txt", "r+");
   int tres;
   fscanf(pExtra, "%d", &tres);
   int cuatro;
@@ -132,94 +133,96 @@ printf("\nIngrese nombre jugador 1\n");
     {mov_gana = mov_x;}
   else if (jugador == jug2)
     {mov_gana = mov_o;}
-  printf(" con %d movimientos\n",  mov_gana);
+ 
+if (hay_ganador==1){//si alguien ganó, hacer lo siguiente:   
+ printf(" con %d movimientos\n",  mov_gana);
+  //actualización de arrays
+  if (mov_gana==3)
+    {for (int i=9; (i>=0); i--)
+      {//verifica primero si se pueden reemplazar valores mayores a 3 mientras no hayan 0s, o si existen 0s
+      if ((puntajes[i]==5 && maxval(puntajes)==5 && minval(puntajes)!=0)||(puntajes[i]==4 && maxval(puntajes)==4 && minval(puntajes)!= 0)||(puntajes[i]==0))
+       {ultimo_valor =i;
+        puntajes[i]=mov_gana;
+          sscanf(jugador, "%s", usuarios+i);
+          break;}
+      //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 3, reemplazando el primer 3 introducido
+       else if (i==tres && puntajes[tres]==3 && puntajes[tres-1]==3 && tres!= 0 && minval(puntajes)!=0 && maxval(puntajes)==3)
+         {ultimo_valor = i ;
+           puntajes[tres]=mov_gana;
+          sscanf(jugador, "%s", usuarios+tres);
+          tres--;
+          fseek(pExtra, 0, SEEK_SET);
+          fprintf(pExtra,"%d\n",tres);
+          break;}
+      else if (i==tres && tres== 0 && puntajes[tres]==3 && puntajes[9]==3 && minval(puntajes)!=0 && maxval(puntajes)==3)
+         {ultimo_valor = i;
+          puntajes[tres]=mov_gana;
+          sscanf(jugador, "%s", usuarios+tres);
+          tres=9;
+          fseek(pExtra, 0, SEEK_SET);
+          fprintf(pExtra,"%d\n",tres);
+          break;}
+        }   
+    }
+    if (mov_gana==4)
+    {for (int i=9; (i>=0); i--)
+      {//verifica primero si se pueden reemplazar valores mayores a 4 mientras no hayan 0s, o si existen 0s
+      if ((puntajes[i]==5 && maxval(puntajes)==5&& minval(puntajes)!=0)||(puntajes[i]==0)) 
+          {ultimo_valor =i;
+            puntajes[i]=mov_gana;
+            sscanf(jugador, "%s",usuarios+i);
+            break;}
+      //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 4, reemplazando el primer 4 introducido
+      else if (i== cuatro && puntajes[cuatro]==4 && puntajes[cuatro-1]==4 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==4)
+         {ultimo_valor =i;
+          puntajes[cuatro]=mov_gana;
+          sscanf(jugador, "%s", usuarios+cuatro);
+          cuatro--;
+          fseek(pExtra, 2, SEEK_SET);
+          fprintf(pExtra,"%d\n",cuatro);
+          break;}
+      else if (i== cuatro && cuatro== 0 && puntajes[cuatro]==4 && puntajes[9]==4 && minval(puntajes)!=0 && maxval(puntajes)==4)
+         {ultimo_valor =i;
+          puntajes[cuatro]=mov_gana;
+          sscanf(jugador, "%s", usuarios+cuatro);
+          cuatro=9;
+          fseek(pExtra, 2, SEEK_SET);
+          fprintf(pExtra,"%d\n",cuatro);
+          break;}
+        }  
+    }
 
-//actualización de arrays
-if (mov_gana==3)
-  {for (int i=9; (i>=0); i--)
-    {//verifica primero si se pueden reemplazar valores mayores a 3 mientras no hayan 0s, o si existen 0s
-    if ((puntajes[i]==5 && maxval(puntajes)==5 && minval(puntajes)!=0)||(puntajes[i]==4 && maxval(puntajes)==4 && minval(puntajes)!= 0)||(puntajes[i]==0))
-     {ultimo_valor =i;
-      puntajes[i]=mov_gana;
-        sscanf(jugador, "%s", usuarios+i);
-        break;}
-    //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 3, reemplazando el primer 3 introducido
-     else if (i==tres && puntajes[tres]==3 && puntajes[tres-1]==3 && tres!= 0 && minval(puntajes)!=0 && maxval(puntajes)==3)
-       {ultimo_valor = i ;
-         puntajes[tres]=mov_gana;
-        sscanf(jugador, "%s", usuarios+tres);
-        tres--;
-        fseek(pExtra, 0, SEEK_SET);
-        fprintf(pExtra,"%d\n",tres);
-        break;}
-    else if (i==tres && tres== 0 && puntajes[tres]==3 && puntajes[9]==3 && minval(puntajes)!=0 && maxval(puntajes)==3)
-       {ultimo_valor = i;
-        puntajes[tres]=mov_gana;
-        sscanf(jugador, "%s", usuarios+tres);
-        tres=9;
-        fseek(pExtra, 0, SEEK_SET);
-        fprintf(pExtra,"%d\n",tres);
-        break;}
-      }   
-  }
-  if (mov_gana==4)
-  {for (int i=9; (i>=0); i--)
-    {//verifica primero si se pueden reemplazar valores mayores a 4 mientras no hayan 0s, o si existen 0s
-    if ((puntajes[i]==5 && maxval(puntajes)==5&& minval(puntajes)!=0)||(puntajes[i]==0)) 
+    if (mov_gana==5)
+    {for (int i=9; (i>=0); i--)
+      {//verifica si hay 0s
+      if (puntajes[i]==0)
         {ultimo_valor =i;
           puntajes[i]=mov_gana;
-          sscanf(jugador, "%s",usuarios+i);
+        sscanf(jugador, "%s", usuarios+i);
+        break;}
+      //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 5, reemplazando el primer 5 introducido
+      else if (i== cinco && puntajes[cinco]==5 && puntajes[cinco-1]==5 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==5)
+         {ultimo_valor =i;
+           puntajes[cinco]=mov_gana;
+          sscanf(jugador, "%s", usuarios+cinco);
+          cinco--;
+          fseek(pExtra, 4, SEEK_SET);
+          fprintf(pExtra,"%d\n",cinco);
           break;}
-    //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 4, reemplazando el primer 4 introducido
-    else if (i== cuatro && puntajes[cuatro]==4 && puntajes[cuatro-1]==4 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==4)
-       {ultimo_valor =i;
-        puntajes[cuatro]=mov_gana;
-        sscanf(jugador, "%s", usuarios+cuatro);
-        cuatro--;
-        fseek(pExtra, 2, SEEK_SET);
-        fprintf(pExtra,"%d\n",cuatro);
-        break;}
-    else if (i== cuatro && cuatro== 0 && puntajes[cuatro]==4 && puntajes[9]==4 && minval(puntajes)!=0 && maxval(puntajes)==4)
-       {ultimo_valor =i;
-        puntajes[cuatro]=mov_gana;
-        sscanf(jugador, "%s", usuarios+cuatro);
-        cuatro=9;
-        fseek(pExtra, 2, SEEK_SET);
-        fprintf(pExtra,"%d\n",cuatro);
-        break;}
-      }  
-  }
+      else if (i== cinco && cinco== 0 && puntajes[cinco]==5 && puntajes[9]==5 && minval(puntajes)!=0 && maxval(puntajes)==5)
+         {ultimo_valor = i;
+          puntajes[cinco]=mov_gana;
+          sscanf(jugador, "%s", usuarios+cinco);
+          cinco=9;
+          fseek(pExtra, 4, SEEK_SET);
+          fprintf(pExtra,"%d\n",cinco);
+          break;}
+        }
+    }
 
-  if (mov_gana==5)
-  {for (int i=9; (i>=0); i--)
-    {//verifica si hay 0s
-    if (puntajes[i]==0)
-      {ultimo_valor =i;
-        puntajes[i]=mov_gana;
-      sscanf(jugador, "%s", usuarios+i);
-      break;}
-    //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 5, reemplazando el primer 5 introducido
-    else if (i== cinco && puntajes[cinco]==5 && puntajes[cinco-1]==5 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==5)
-       {ultimo_valor =i;
-         puntajes[cinco]=mov_gana;
-        sscanf(jugador, "%s", usuarios+cinco);
-        cinco--;
-        fseek(pExtra, 4, SEEK_SET);
-        fprintf(pExtra,"%d\n",cinco);
-        break;}
-    else if (i== cinco && cinco== 0 && puntajes[cinco]==5 && puntajes[9]==5 && minval(puntajes)!=0 && maxval(puntajes)==5)
-       {ultimo_valor = i;
-        puntajes[cinco]=mov_gana;
-        sscanf(jugador, "%s", usuarios+cinco);
-        cinco=9;
-        fseek(pExtra, 4, SEEK_SET);
-        fprintf(pExtra,"%d\n",cinco);
-        break;}
-      }
-  }
- 
-fseek(pExtra, 6, SEEK_SET);
-fprintf(pExtra,"%d\n",ultimo_valor);
+  fseek(pExtra, 6, SEEK_SET);
+  fprintf(pExtra,"%d\n",ultimo_valor);
+}
 fclose(pExtra);
  //actualizamos los archivos de usuarios y puntajes
   incluir_puntos(puntajes);
