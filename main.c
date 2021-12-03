@@ -111,6 +111,7 @@ printf("\nIngrese nombre jugador 1\n");
     )
       {
       printf("\nFin del juego, gana %s", jugador);
+      hay_ganador=1; //alguien ganó
       break;
       }
     contadorG++;
