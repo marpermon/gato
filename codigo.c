@@ -74,9 +74,10 @@ printf("\nIngrese nombre jugador 1\n");
   
   imprimir_matriz(mat);
  
-  int contadorG = 0;
+  int contadorG = 0; //[0,8] sólo se puede hacer 9 movimientos en el juego del gato
 
-  while(contadorG<9){
+  while(contadorG<9)
+  {//designa  quién es el jugador en determinado momento, con su respectivo símbolo
     if (contadorG % 2 == 0)
     {
       jugador = jug1;
@@ -112,7 +113,6 @@ printf("\nIngrese nombre jugador 1\n");
       break;
       }
     contadorG++;
-    //printf("contador = %d\n", contadorG);
   }
   
 
@@ -121,7 +121,7 @@ printf("\nIngrese nombre jugador 1\n");
   int mov_o =0;  
   int mov_gana;
   for (int i=0; i<size;i++)
-  {
+  {//cantidad de movimientos del ganador
     if (*(mat[0]+i)=='x')
     {mov_x++;}
     else if (*(mat[0]+i)=='o')
@@ -134,17 +134,17 @@ printf("\nIngrese nombre jugador 1\n");
     {mov_gana = mov_o;}
   printf(" con %d movimientos\n",  mov_gana);
 
-
+//actualización de arrays
 if (mov_gana==3)
   {for (int i=9; (i>=0); i--)
-    {if ((puntajes[i]==5 && maxval(puntajes)==5 && minval(puntajes)!=0)||(puntajes[i]==4 && maxval(puntajes)==4 && minval(puntajes)!= 0)||(puntajes[i]==0))
-     //verifica primero si se pueden reemplazar valores mayores a 3 mientras no hayan 0s, o si existen 0s
+    {//verifica primero si se pueden reemplazar valores mayores a 3 mientras no hayan 0s, o si existen 0s
+    if ((puntajes[i]==5 && maxval(puntajes)==5 && minval(puntajes)!=0)||(puntajes[i]==4 && maxval(puntajes)==4 && minval(puntajes)!= 0)||(puntajes[i]==0))
      {ultimo_valor =i;
       puntajes[i]=mov_gana;
         sscanf(jugador, "%s", usuarios+i);
         break;}
-    else if (i==tres && puntajes[tres]==3 && puntajes[tres-1]==3 && tres!= 0 && minval(puntajes)!=0 && maxval(puntajes)==3)
-    //si las puntuaciones sólo están compuestas de 3 
+    //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 3, reemplazando el primer 3 introducido
+     else if (i==tres && puntajes[tres]==3 && puntajes[tres-1]==3 && tres!= 0 && minval(puntajes)!=0 && maxval(puntajes)==3)
        {ultimo_valor = i ;
          puntajes[tres]=mov_gana;
         sscanf(jugador, "%s", usuarios+tres);
@@ -164,12 +164,13 @@ if (mov_gana==3)
   }
   if (mov_gana==4)
   {for (int i=9; (i>=0); i--)
-    {if ((puntajes[i]==5 && maxval(puntajes)==5&& minval(puntajes)!=0)||(puntajes[i]==0)) 
-    //verifica primero si se pueden reemplazar valores mayores a 4 mientras no hayan 0s, o si existen 0s
+    {//verifica primero si se pueden reemplazar valores mayores a 4 mientras no hayan 0s, o si existen 0s
+    if ((puntajes[i]==5 && maxval(puntajes)==5&& minval(puntajes)!=0)||(puntajes[i]==0)) 
         {ultimo_valor =i;
           puntajes[i]=mov_gana;
           sscanf(jugador, "%s",usuarios+i);
           break;}
+    //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 4, reemplazando el primer 4 introducido
     else if (i== cuatro && puntajes[cuatro]==4 && puntajes[cuatro-1]==4 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==4)
        {ultimo_valor =i;
         puntajes[cuatro]=mov_gana;
@@ -191,11 +192,13 @@ if (mov_gana==3)
 
   if (mov_gana==5)
   {for (int i=9; (i>=0); i--)
-    {if (puntajes[i]==0)
+    {//verifica si hay 0s
+    if (puntajes[i]==0)
       {ultimo_valor =i;
         puntajes[i]=mov_gana;
       sscanf(jugador, "%s", usuarios+i);
       break;}
+    //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 5, reemplazando el primer 5 introducido
     else if (i== cinco && puntajes[cinco]==5 && puntajes[cinco-1]==5 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==5)
        {ultimo_valor =i;
          puntajes[cinco]=mov_gana;
@@ -218,8 +221,10 @@ if (mov_gana==3)
 fseek(pExtra, 6, SEEK_SET);
 fprintf(pExtra,"%d\n",ultimo_valor);
 fclose(pExtra);
+ //actualizamos los archivos de usuarios y puntajes
   incluir_puntos(puntajes);
   incluir(usuarios);
+ //nos cercioramos de que se imprimirán bien e imprimimos
   array_puntos(puntajes);
   array_usuarios(usuarios);
   imprimir_todo(puntajes,usuarios,ultimo_valor);
