@@ -54,7 +54,7 @@ char jug2[15];
 
 array_puntos(puntajes);
 array_usuarios(usuarios);
-printf("%d",minval(puntajes));
+
 int opt;
 printf("\nMenú Principal. Elija una opción:");
 printf("\n1-Empezar el juego");
