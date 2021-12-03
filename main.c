@@ -224,6 +224,11 @@ if (hay_ganador==1){//si alguien ganó, hacer lo siguiente:
   fseek(pExtra, 6, SEEK_SET);
   fprintf(pExtra,"%d\n",ultimo_valor);
 }
+ else
+{
+  printf("\nFin del juego, no hay ganador\n");
+}
+ 
 fclose(pExtra);
  //actualizamos los archivos de usuarios y puntajes
   incluir_puntos(puntajes);
