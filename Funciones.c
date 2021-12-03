@@ -15,7 +15,7 @@ if (k == 'c')
   }
 }
 
-void imprimir_matriz(char b[3][3])//imprime la matriz que se muestra
+void imprimir_matriz(char b[3][3])//imprime la matriz que se muestra como tablero
 {
    printf("  a  b  c\n");
    for(int i=0;i<3;i++)
