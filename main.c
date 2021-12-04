@@ -36,7 +36,7 @@ casilla();}
 
 int main() 
 {int hay_ganador; //para verificar si hay ganador
-  FILE *pExtra = fopen("extra.txt", "r+");
+  FILE *pExtra = fopen("extra.txt", "r+"); //se recoge la información de extra.txt
   int tres;
   fscanf(pExtra, "%d", &tres);
   int cuatro;
@@ -52,8 +52,8 @@ int main()
 char jug1[15];
 char jug2[15];  
 
-array_puntos(puntajes);
-array_usuarios(usuarios);
+array_puntos(puntajes); //se llena el array de puntajes con la información del archivo de puntajes
+array_usuarios(usuarios); //se llena el array de usuarios con la información del archivo de usuarios
 
 int opt;
 printf("\nMenú Principal. Elija una opción:");
