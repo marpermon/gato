@@ -58,7 +58,7 @@ array_usuarios(usuarios); //se llena el array de usuarios con la información de
 int opt;
 printf("\nMenú Principal. Elija una opción:");
 printf("\n1-Empezar el juego");
-printf("\n2-Ver 10 últimas puntuaciones");
+printf("\n2-Ver 10 mejores puntuaciones");
 printf("\nCualquier otra tecla-Salir\n");
 scanf("%d",&opt);
 switch (opt)
