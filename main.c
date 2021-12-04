@@ -12,7 +12,7 @@ char usuarios[10][15];
 int puntajes[10];
 char str1[2];
 
-void casilla()
+void casilla() //función para introducir casillas
 { printf("Ingrese casilla %s\n", jugador);
 scanf("%s", str1);
 char str2[]={str1[0]};
@@ -146,7 +146,7 @@ if (hay_ganador==1){//si alguien ganó, hacer lo siguiente:
         puntajes[i]=mov_gana;
           sscanf(jugador, "%s", usuarios+i);
           break;}
-      //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 3, reemplazando el primer 3 introducido
+      //los dos else if siguientes se encargan de reemplazar valores en los arrays si las puntuaciones sólo están compuestas de 3, reemplazando el primer 3 introducido
        else if (i==tres && puntajes[tres]==3 && puntajes[tres-1]==3 && tres!= 0 && minval(puntajes)!=0 && maxval(puntajes)==3)
          {ultimo_valor = i ;
            puntajes[tres]=mov_gana;
@@ -173,7 +173,7 @@ if (hay_ganador==1){//si alguien ganó, hacer lo siguiente:
             puntajes[i]=mov_gana;
             sscanf(jugador, "%s",usuarios+i);
             break;}
-      //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 4, reemplazando el primer 4 introducido
+      //los dos else if siguientes se encargan de reemplazar valores en los arrays si las puntuaciones sólo están compuestas de 4, reemplazando el primer 4 introducido
       else if (i== cuatro && puntajes[cuatro]==4 && puntajes[cuatro-1]==4 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==4)
          {ultimo_valor =i;
           puntajes[cuatro]=mov_gana;
@@ -201,7 +201,7 @@ if (hay_ganador==1){//si alguien ganó, hacer lo siguiente:
           puntajes[i]=mov_gana;
         sscanf(jugador, "%s", usuarios+i);
         break;}
-      //los dos else if siguientes se encargan de reemplazar vlores en los arrays si las puntuaciones sólo están compuestas de 5, reemplazando el primer 5 introducido
+      //los dos else if siguientes se encargan de reemplazar valores en los arrays si las puntuaciones sólo están compuestas de 5, reemplazando el primer 5 introducido
       else if (i== cinco && puntajes[cinco]==5 && puntajes[cinco-1]==5 && cinco!= 0 && minval(puntajes)!=0 && maxval(puntajes)==5)
          {ultimo_valor =i;
            puntajes[cinco]=mov_gana;
