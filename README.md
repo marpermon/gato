@@ -8,7 +8,7 @@ María Paulette Pérez Monge
 B95916
 Instrucciones para compilar y correr:
 1. Descargar todos los demás archivos en una misma carpeta, incluyendo los archivos de texto.
-2. Escribir "gcc main.c Funciones.c -o main.out " en la terminal de linux para compilar main.c y Funciones.c
+2. Escribir "gcc main.c Funciones.c -o main.out " en su terminal para compilar main.c y Funciones.c
 3. Escribir "./main.out " en la terminal para correr main.c
 4. Introducir la opción de su preferencia en el menú de juego.
 5. En el caso de que elija 1:
